@@ -77,11 +77,18 @@ public class Interpreter {
         return current;
     }
 
+    public static String transInput(String s){
+        StringBuffer b = new StringBuffer(); 
+        for(int i=0;i<s.length()-1;i++){
+            b.append(s.charAt(i));
+            if(s.charAt(i)==')'&&s.charAt(i+1)!=')'&&s.charAt(i+1)!=' ')
+                b.append(' ');
+        }
+        b.append(s.charAt(s.length()-1));
+        return b.toString();
+    }
+    
     public static void main(String[] args) {
-        /*
-        *input law(codes to ignore this will be made if time permiting)
-        *") (" instead of ")("
-        */
 
         //Here are examples
         //String source = "(\\x.(\\y.y x) z) v";  //success
@@ -89,8 +96,9 @@ public class Interpreter {
         //String source = "(\\x.x x) (\\x.x x)";  //success
         //String source = "(\\x.x x y) (\\x.x x y)";  //ok (this will be longer and longer)
         //String source="(\\x.\\y.x y) m n";  //success
-        String source="(\\x.\\y.\\z.x z(y z)) (\\x.x) m n";  //success
+        String source="(\\x.\\y.\\z.x z(y z))(\\x.x) m n";  //success
 
+        source=transInput(source);
         System.out.println(toInterpreter(source));
     }
 }
