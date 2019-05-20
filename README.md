@@ -21,7 +21,7 @@ v2.0 (May 19, 2019):Changes below are made to fix some bugs and support expressi
 parameters (like "\x.\y...", actually v1.0 cant' deal with them).
     1.I rewrited the "offLR" method. (This method is used to remove the outermost parentheses of a 
       string.
-    2.I changed the order of separating APPLICATION. In this version, it's divided from back to front.
+    2.I changed the order to separate APPLICATION. In this version, it's divided from back to front.
     3.I optimized the logic of adding parentheses when simplifying.
-    4.I added detection of special expressions，which will grow during simplification.
+    4.I added detection to deal with special expressions，which will grow during simplification.
 ```
