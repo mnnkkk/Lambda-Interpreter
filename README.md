@@ -26,3 +26,6 @@ parameters (like "\x.\y...", actually v1.0 can't deal with them).
     3.I optimized the logic of adding parentheses when simplifying.
     4.I added detection to deal with special expressions，which will grow during simplification.
 ```
+```
+v2.1 (May 22, 2019):Changes have been made to divide ABSTRACTION. Also, some details are improved.
+```
