@@ -1,5 +1,4 @@
 package lambda;
-import java.util.*;
 
 public class Node{
     public NodeType type=null;
@@ -30,9 +29,9 @@ public class Node{
     public NodeType typeOfString(String s){
         if(s.length()==1)    //a
             return NodeType.ATOM;
-        if(s.charAt(0)=='\\')   // \x.x y
+        if(s.charAt(0)=='\\'&&s.length()!=3)   // \x.x y
             return NodeType.ABSTRACTION;
-        return NodeType.APPLICATION;  // s d || (\x.x y) k
+        return NodeType.APPLICATION;  // s d || (\x.x y) k ||\x.
     }
 
     public boolean isValid(String s) {
@@ -59,31 +58,44 @@ public class Node{
             return;
 
         if(this.type==NodeType.ABSTRACTION){
-            if(typeOfString(this.bodyOfAbstraction)==NodeType.ATOM
-                    ||typeOfString(this.bodyOfAbstraction)==NodeType.ABSTRACTION)
+
+            if(typeOfString(this.bodyOfAbstraction)==NodeType.ATOM)
                 return;
-            //typeOfString(this.bodyOfAbstraction)==APPLICATION
-            if(!bodyOfAbstraction.contains("."))
+
+            if(!bodyOfAbstraction.contains("("))
                 return;
-            if(bodyOfAbstraction.charAt(0)!='('){
-                this.leftChild=new Node(bodyOfAbstraction.substring(0,1));
-                this.rightChild=new Node(bodyOfAbstraction.substring(2,bodyOfAbstraction.length()));
+
+            if(typeOfString(this.bodyOfAbstraction)==NodeType.ABSTRACTION){
+                this.leftChild=new Node(bodyOfAbstraction.substring(0,3));
+                this.rightChild=new Node(bodyOfAbstraction.substring(3,bodyOfAbstraction.length()));
             }
-            else{
-                int leftcount=0,rightcount=0;
-                int i;
-                for(i=bodyOfAbstraction.length()-1;i>=0;i--){
-                    if(bodyOfAbstraction.charAt(i)=='(')
-                        leftcount++;
-                    else if(bodyOfAbstraction.charAt(i)==')')
-                        rightcount++;
-                    if(leftcount==rightcount&&bodyOfAbstraction.charAt(i)==' ')
-                        break;
+
+            if(typeOfString(this.bodyOfAbstraction)==NodeType.APPLICATION){
+                if(!bodyOfAbstraction.contains("."))
+                    return;
+                if(bodyOfAbstraction.charAt(0)!='('){
+                    this.leftChild=new Node(bodyOfAbstraction.substring(0,1));
+                    this.rightChild=new Node(bodyOfAbstraction.substring(2,bodyOfAbstraction.length()));
                 }
+                else{
+                    int leftcount=0,rightcount=0;
+                    int i;
+                    for(i=bodyOfAbstraction.length()-1;i>=0;i--){
+                        if(bodyOfAbstraction.charAt(i)=='(')
+                            leftcount++;
+                        else if(bodyOfAbstraction.charAt(i)==')')
+                            rightcount++;
+                        if(leftcount==rightcount&&bodyOfAbstraction.charAt(i)==' ')
+                            break;
+                    }
+                if(i<=0)
+                    return;
                 this.leftChild=new Node(bodyOfAbstraction.substring(0,i));
                 this.rightChild=new Node(bodyOfAbstraction.substring(i+1,bodyOfAbstraction.length()));
+                }
             }
         }
+
         if(this.type==NodeType.APPLICATION){
             if(!contentOfApplication.contains("."))
                 return;
@@ -97,8 +109,10 @@ public class Node{
                 if(leftcount==rightcount&&contentOfApplication.charAt(i)==' ')
                     break;
             }
-                this.leftChild=new Node(contentOfApplication.substring(0,i));
-                this.rightChild=new Node(contentOfApplication.substring(i+1,contentOfApplication.length()));   
+            if(i<=0)
+                return;
+            this.leftChild=new Node(contentOfApplication.substring(0,i));
+            this.rightChild=new Node(contentOfApplication.substring(i+1,contentOfApplication.length()));   
         }
         this.leftChild.extend();
         this.rightChild.extend();
