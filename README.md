@@ -29,3 +29,9 @@ parameters (like "\x.\y...", actually v1.0 can't deal with them).
 ```
 v2.1 (May 22, 2019):Changes have been made to divide ABSTRACTION. Also, some details are improved.
 ```
+```
+v2.2 (May 22, 2019):Changes below are made to fix some bugs.
+    1.The logic of "replaceStr" method has been optimized.
+    2.The way to add space during reduction has been improved.
+    3. Some codes have been simplified.
+```
