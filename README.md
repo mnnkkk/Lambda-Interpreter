@@ -14,7 +14,7 @@ the AST and gets the result.
 
 ## Version Information
 ```
-v1.0 (May 13, 2019) (Initial commit):A procedure to deal with lambda expressions, you can run 
+v1.0 (May 13, 2019) (Initial commit):A procedure to deal with lambda expressions, you can run it 
 through the main method of Interpreter.java.
 ```
 ```
