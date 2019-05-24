@@ -7,15 +7,15 @@ It's an interpreter to simplify lambda expressions.
 
 ## How does it works?
 ```
-The type of each lambda expression is ATOM, APPLICATION or ABSTRACTION. By analysing
-the composition of input, the interpreter generates and entends an AST. Then, it 
-applies computing rules to simplize the AST and gets the result.
+The type of each lambda expression is ATOM, APPLICATION or ABSTRACTION. By analysing the composition
+of input, the interpreter generates and entends an AST. Then, it applies computing rules to simplize
+the AST and gets the result.
 ```
 
 ## Version Information
 ```
-v1.0 (May 13, 2019) (Initial commit):This is a preliminary procedure (you can run through the main 
-method of Interpreter.java) and contains many flaws. Next I am going to Optimize these codes.
+v1.0 (May 13, 2019) (Initial commit):A procedure to deal with lambda expressions, you can run 
+through the main method of Interpreter.java.
 ```
 ```
 v2.0 (May 19, 2019):Changes below are made to fix some bugs and support expressions with adjacent 
