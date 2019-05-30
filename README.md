@@ -35,3 +35,6 @@ v2.2 (May 22, 2019):Changes below are made to fix some bugs.
     2.The way to add space during reduction has been improved.
     3. Some codes have been simplified.
 ```
+```
+v3.0 (May 30, 2019):A great improvement, can deal with at least 59 lambdas!
+```
