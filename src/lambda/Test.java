@@ -58,11 +58,10 @@ public class Test{
         app(IF, app(AND, TRUE, FALSE), FOUR, THREE),//21 s
         app(ISZERO, ZERO),//22 s
         app(ISZERO, ONE),//23 s
-        //
         app(LEQ, THREE, TWO),//24 s   
         app(LEQ, TWO, THREE),//25 s   
         app(EQ, TWO, FOUR),//26 s
-        app(EQ, FIVE, FIVE),//27 f
+        app(EQ, FIVE, FIVE),//27 s
         app(MAX, ONE, TWO),//28 s    
         app(MAX, FOUR, TWO),//29 s   
         app(MIN, ONE, TWO),//30 s   
