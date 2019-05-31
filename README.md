@@ -12,10 +12,15 @@ of input, the interpreter generates and entends an AST. Then, it applies computi
 the AST and gets the result.
 ```
 
+## How to run it?
+```
+v 3.0 : You can run the main method of Test.java, which contains 32 examples.
+v 1.0 -- v 2.2 : You can run it through the main method of Interpreter.java.
+```
+
 ## Version Information
 ```
-v1.0 (May 13, 2019) (Initial commit):A procedure to deal with lambda expressions, you can run it 
-through the main method of Interpreter.java.
+v1.0 (May 13, 2019) (Initial commit):A procedure to deal with lambda expressions.
 ```
 ```
 v2.0 (May 19, 2019):Changes below are made to fix some bugs and support expressions with adjacent 
@@ -53,5 +58,5 @@ v3.0 (May 31, 2019):Great improvement.
     Restrictions and solutions related to "transSourceIA" method: The method makes lambda parametes
                     into 'A'to 'Y','a' to 'y','0' to '8', totally 58 characters. So it may cant's 
                     deal with lambda expressions with more than 58 lambda parametes. To deal with 
-                    the problem, you can replace char with other data structures with more variants.                       
+                    the problem, you can replace char with other data structures with more variants.
 ```
