@@ -1,6 +1,7 @@
 package lambda;
 
 public class Node{
+    public static int flag=0;
     public NodeType type=null;
 
     public String qcontent;
@@ -56,43 +57,32 @@ public class Node{
     public void extend(){
         if(this.type==NodeType.ATOM)
             return;
-
         if(this.type==NodeType.ABSTRACTION){
-
             if(typeOfString(this.bodyOfAbstraction)==NodeType.ATOM)
                 return;
-
             if(!bodyOfAbstraction.contains("("))
                 return;
-
             if(typeOfString(this.bodyOfAbstraction)==NodeType.ABSTRACTION){
                 this.leftChild=new Node(bodyOfAbstraction.substring(0,3));
                 this.rightChild=new Node(bodyOfAbstraction.substring(3,bodyOfAbstraction.length()));
             }
-
             if(typeOfString(this.bodyOfAbstraction)==NodeType.APPLICATION){
                 if(!bodyOfAbstraction.contains("."))
-                    return;
-                if(bodyOfAbstraction.charAt(0)!='('){
-                    this.leftChild=new Node(bodyOfAbstraction.substring(0,1));
-                    this.rightChild=new Node(bodyOfAbstraction.substring(2,bodyOfAbstraction.length()));
+                    return;   
+                int leftcount=0,rightcount=0;
+                int i;
+                for(i=bodyOfAbstraction.length()-1;i>=0;i--){
+                    if(bodyOfAbstraction.charAt(i)=='(')
+                        leftcount++;
+                    else if(bodyOfAbstraction.charAt(i)==')')
+                        rightcount++;
+                    if(leftcount==rightcount&&bodyOfAbstraction.charAt(i)==' ')
+                        break;
                 }
-                else{
-                    int leftcount=0,rightcount=0;
-                    int i;
-                    for(i=bodyOfAbstraction.length()-1;i>=0;i--){
-                        if(bodyOfAbstraction.charAt(i)=='(')
-                            leftcount++;
-                        else if(bodyOfAbstraction.charAt(i)==')')
-                            rightcount++;
-                        if(leftcount==rightcount&&bodyOfAbstraction.charAt(i)==' ')
-                            break;
-                    }
                 if(i<=0)
                     return;
                 this.leftChild=new Node(bodyOfAbstraction.substring(0,i));
                 this.rightChild=new Node(bodyOfAbstraction.substring(i+1,bodyOfAbstraction.length()));
-                }
             }
         }
 
@@ -121,10 +111,9 @@ public class Node{
     public String toString(){
         if(this.type==NodeType.ATOM)
             return String.valueOf(contentOfAtom);
-        if(this.type==NodeType.APPLICATION)
+        else if(this.type==NodeType.APPLICATION)
             return contentOfApplication;
-        if(this.type==NodeType.ABSTRACTION)
+        else
             return "\\"+parmOfAbstraction+"."+bodyOfAbstraction;
-        return null;
     }
 }
